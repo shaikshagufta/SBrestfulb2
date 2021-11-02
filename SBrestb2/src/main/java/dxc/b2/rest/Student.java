@@ -1,15 +1,30 @@
 package dxc.b2.rest;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
- * POJO class or a bean or a value object or a model class
+ * pojo class or a bean or a value object or a model class
+ * @author Admin
  *
  */
+@Entity
+@Table(name = "students")
+
 public class Student {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
+	@Column
 	String name;
+	@Column
 	int sem;
+	@Column
 	int avg;
+	public Student() {}
 	public Student(int id, String name, int sem, int avg) {
 		super();
 		this.id = id;
@@ -41,7 +56,7 @@ public class Student {
 	public void setAvg(int avg) {
 		this.avg = avg;
 	}
-
-
+	
+	
 
 }

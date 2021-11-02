@@ -2,21 +2,22 @@ package dxc.b2.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * this class will query the database and get the students required
- *
+ * @author Admin
  *
  */
 
 @Service
 public class StudentService {
+List<Student> students = new ArrayList<>();
+	
 
-	List<Student> students = new ArrayList<>();
-
-
+@Autowired
+StudentRepository studentRepository;
 
 	public void createStudents() {
 
@@ -25,14 +26,12 @@ public class StudentService {
 		students.add(new Student(3, "ccc",3, 33));
 		students.add(new Student(4, "ddd", 4, 44));
 	}
-
-
+	
+	
 	public List<Student> getStudents(){
 		createStudents();
-		return students;
+		return studentRepository.findAll();
 	}
-
-
 	public Student findStudent(int id) {
 
 		Student student=  students.stream()   //convert the students list to a stream
@@ -42,5 +41,14 @@ public class StudentService {
 
 		return student;
 	}
+	
+	public void addStudent(Student student) {
+		//students.add(student);
+		studentRepository.save(student);
+		System.out.println("added a student "+ student.getName());
+
+	}
+
+
 
 }
